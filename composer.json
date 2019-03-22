@@ -1,0 +1,43 @@
+{
+    "name": "codersstudio/notifications",
+    "description": ":description",
+    "license": "license",
+    "authors": [
+        {
+            "name": "Coders Studio",
+            "email": "info@coders.studio",
+            "homepage": "https://coders.studio"
+        }
+    ],
+    "homepage": "https://github.com/codersstudio/notifications",
+    "keywords": ["Laravel", "Notifications"],
+    "require": {
+        "illuminate/support": "~5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0",
+        "mockery/mockery": "^1.1",
+        "orchestra/testbench": "~3.0",
+        "sempro/phpunit-pretty-print": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CodersStudio\\Notifications\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CodersStudio\\Notifications\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CodersStudio\\Notifications\\NotificationsServiceProvider"
+            ],
+            "aliases": {
+                "Notifications": "CodersStudio\\Notifications\\Facades\\Notifications"
+            }
+        }
+    }
+}
