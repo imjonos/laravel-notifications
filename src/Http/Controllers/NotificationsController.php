@@ -17,10 +17,11 @@ class NotificationsController extends BaseController
      */
     public function index($id)
     {
-        $messages = [];
         if($id!=Auth::id()) abort(403, 'Access denied');
-        $user = $this->getModel()::findOrFail($id);
-        $messages = $user->unreadNotifications;
+        $messages = $this->getModel()::findOrFail($id)
+            ->unreadNotifications()
+            ->where('type', 'App\Notifications\System')
+            ->get();
         return new NotificationsResource($messages); 
     }
 
@@ -35,6 +36,22 @@ class NotificationsController extends BaseController
         if($id!=Auth::id()) abort(403, 'Access denied');
         $user = $this->getModel()::findOrFail($id);
         $user->unreadNotifications->where('id', $messageId)->markAsRead();
+        return response(null, 204);
+    }
+
+    /**
+     * Отметить как прочитанное все сообщения
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function readAll($id)
+    {
+        if($id!=Auth::id()) abort(403, 'Access denied');
+        $this->getModel()::findOrFail($id)
+            ->unreadNotifications()
+            ->where('type', 'App\Notifications\System')
+            ->get()
+            ->markAsRead();
         return response(null, 204);
     }
 
