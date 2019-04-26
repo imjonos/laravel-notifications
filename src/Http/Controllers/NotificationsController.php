@@ -2,7 +2,7 @@
 namespace CodersStudio\Notifications\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
-use  CodersStudio\Notifications\Http\Resources\NotificationsResource;
+use CodersStudio\Notifications\Http\Resources\NotificationsResource;
 use Auth;
 
 class NotificationsController extends BaseController
@@ -20,7 +20,7 @@ class NotificationsController extends BaseController
         if($id!=Auth::id()) abort(403, 'Access denied');
         $messages = $this->getModel()::findOrFail($id)
             ->unreadNotifications()
-            ->where('type', 'App\Notifications\System')
+            ->where('type', 'CodersStudio\Notifications\Notifications\System')
             ->get();
         return new NotificationsResource($messages); 
     }
@@ -47,11 +47,12 @@ class NotificationsController extends BaseController
     public function readAll($id)
     {
         if($id!=Auth::id()) abort(403, 'Access denied');
-        $this->getModel()::findOrFail($id)
+        $messages = $this->getModel()::findOrFail($id)
             ->unreadNotifications()
-            ->where('type', 'App\Notifications\System')
+            ->where('type', 'CodersStudio\Notifications\Notifications\System')
             ->get()
             ->markAsRead();
+          
         return response(null, 204);
     }
 

@@ -11,8 +11,8 @@ class NotificationsServiceProvider extends ServiceProvider
      */
     public function boot()
     {  
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'codersstudio');
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'codersstudio');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'codersstudio/notifications');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'codersstudio/notifications');
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
          
@@ -71,9 +71,9 @@ class NotificationsServiceProvider extends ServiceProvider
         ], 'notifications.assets');
 
         // Publishing the translation files.
-        /*$this->publishes([
+        $this->publishes([
             __DIR__.'/../resources/lang' => resource_path('lang/vendor/codersstudio'),
-        ], 'notifications.views');*/
+        ], 'notifications.notification');
 
         // Registering package commands.
         // $this->commands([]);

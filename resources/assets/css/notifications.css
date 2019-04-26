@@ -1,0 +1,18 @@
+.notification-message{
+    width:300px;
+    white-space: initial;
+    cursor: pointer;
+}
+
+.notification .notification-footer{
+   text-align: center;
+}
+
+.notification .notification-footer a{
+    text-decoration: none;
+ }
+
+.notification .notification-content {
+    overflow-y: auto;
+    max-height: 350px;
+}
