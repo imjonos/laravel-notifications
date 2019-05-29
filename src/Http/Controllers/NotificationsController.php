@@ -20,7 +20,7 @@ class NotificationsController extends BaseController
         if($id!=Auth::id()) abort(403, 'Access denied');
         $messages = $this->getModel()::findOrFail($id)
             ->unreadNotifications()
-            ->where('type', 'CodersStudio\Notifications\Notifications\System')
+            ->where('type', config('notifications.system_notification'))
             ->get();
         return new NotificationsResource($messages); 
     }
@@ -49,7 +49,7 @@ class NotificationsController extends BaseController
         if($id!=Auth::id()) abort(403, 'Access denied');
         $messages = $this->getModel()::findOrFail($id)
             ->unreadNotifications()
-            ->where('type', 'CodersStudio\Notifications\Notifications\System')
+            ->where('type', config('notifications.system_notification'))
             ->get()
             ->markAsRead();
           
