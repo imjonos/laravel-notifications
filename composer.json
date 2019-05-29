@@ -1,7 +1,7 @@
 {
     "name": "codersstudio/notifications",
-    "description": ":description",
-    "license": "license",
+    "description": "notifications base package",
+    "license": "MIT",
     "authors": [
         {
             "name": "Coders Studio",
@@ -9,7 +9,7 @@
             "homepage": "https://coders.studio"
         }
     ],
-    "homepage": "https://github.com/codersstudio/notifications",
+    "homepage": "https://gitlab.com/codersstudio/notifications",
     "keywords": ["Laravel", "Notifications"],
     "require": {
         "illuminate/support": "~5"
