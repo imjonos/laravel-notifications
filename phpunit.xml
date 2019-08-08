@@ -10,7 +10,7 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="Notifications">
+        <testsuite name="Package">
             <directory suffix=".php">./tests/</directory>
         </testsuite>
     </testsuites>

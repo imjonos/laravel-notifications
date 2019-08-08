@@ -2,9 +2,6 @@
 namespace CodersStudio\Notifications;
 use Illuminate\Support\ServiceProvider;
 
-/**
- * Notifications
- */
 class NotificationsServiceProvider extends ServiceProvider
 {
     /**

@@ -21,10 +21,6 @@ $ php artisan migrate
 
 Notification::send(Auth::user(), new System("text", "/"));
 
-Or you can use Facade
-
-Notifications::send(Auth::user(), "test", "/");
-
 ## Change log
 
 Please see the [changelog](changelog.md) for more information on what has changed recently.

@@ -1,6 +1,5 @@
 <?php
 
 return [
-    'model' => \App\User::class,
-    'system_notification' => 'CodersStudio\Notifications\Notifications\System'
+    'model' => \App\User::class
 ];
