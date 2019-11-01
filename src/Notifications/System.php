@@ -6,15 +6,17 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use NotificationChannels\Telegram\TelegramChannel;
+use NotificationChannels\Telegram\TelegramMessage;
 
 class System extends Notification
 {
     use Queueable;
 
-    protected $text; 
+    protected $text;
     protected $link;
     protected $params;
-    
+
 
     /**
      * Create a new notification instance.
@@ -38,10 +40,14 @@ class System extends Notification
      */
     public function via($notifiable)
     {
-        return ['database', 'broadcast'];
+        $via = ['database', 'broadcast'];
+        if (config('notifications.telegram_chat_id')) {
+            $via[] = TelegramChannel::class;
+        }
+        return $via;
     }
 
-   
+
     /**
      * Get the array representation of the notification.
      *
@@ -55,5 +61,21 @@ class System extends Notification
             "link" => $this->link,
             "params" => $this->params,
         ];
+    }
+
+    /**
+     * Send notification to telegram chat
+     * @param $notifiable
+     * @return TelegramMessage
+     */
+    public function toTelegram($notifiable)
+    {
+        $message = TelegramMessage::create()
+            ->to(config('notifications.telegram_chat_id'))
+            ->content($this->text);
+        if ($this->link) {
+            $message = $message->button('View Invoice', $this->link);
+        }
+        return $message;
     }
 }
