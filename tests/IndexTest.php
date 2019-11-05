@@ -2,6 +2,8 @@
 
 namespace  CodersStudio\Notifications\Tests;
 
+use CodersStudio\Notifications\Notifications\System;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use CodersStudio\Notifications\Facades\Notifications;
@@ -13,7 +15,7 @@ class IndexTest extends TestCase
 {
     use RefreshDatabase;
     use WithoutMiddleware;
-    
+
     /**
      * Test index action
      *
@@ -67,11 +69,13 @@ class IndexTest extends TestCase
      */
     public function init(){
         $this->loginWithFakeUser();
-        Notifications::send(Auth::user(), "test", "/");
+        //Uncomment to test telegram be sure using proxy if not on vps
+//        Notification::send(Auth::user(), new System("test message", "/something",['telegram' => true]));
+        Notifications::send(Auth::user(), "test", "/", ['telegram' => true]);
         $response = $this->get('/users/1/notifications');
         $response->assertStatus(200);
         $response->assertJson([
-            "data" => [ 
+            "data" => [
                 ["type"=> "notifications"]
             ]
         ]);

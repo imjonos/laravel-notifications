@@ -74,7 +74,7 @@ class System extends Notification
             ->to(config('notifications.telegram_chat_id'))
             ->content($this->text);
         if ($this->link) {
-            $message = $message->button('View Invoice', $this->link);
+            $message = $message->button('->', url($this->link));
         }
         return $message;
     }
