@@ -41,7 +41,7 @@ class System extends Notification
     public function via($notifiable)
     {
         $via = ['database', 'broadcast'];
-        if (config('notifications.telegram_chat_id')) {
+        if (config('notifications.telegram_chat_id') && !empty($this->params['telegram'])) {
             $via[] = TelegramChannel::class;
         }
         return $via;
