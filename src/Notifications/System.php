@@ -11,7 +11,7 @@ use NotificationChannels\Telegram\TelegramMessage;
 
 class System extends Notification
 {
-    use Queueable, SerializesModels, ShouldQueue;
+    use Queueable, ShouldQueue;
 
     protected $text;
     protected $link;
