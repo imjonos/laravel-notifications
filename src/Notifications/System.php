@@ -44,6 +44,9 @@ class System extends Notification
         if (config('notifications.telegram_chat_id') && !empty($this->params['telegram'])) {
             $via[] = TelegramChannel::class;
         }
+        if (!empty($this->params['mail']) && !empty($this->params['title'])) {
+            $via[] = 'mail';
+        }
         return $via;
     }
 
@@ -61,6 +64,19 @@ class System extends Notification
             "link" => $this->link,
             "params" => $this->params,
         ];
+    }
+
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return MailMessage
+     */
+    public function toMail($notifiable)
+    {
+        return (new MailMessage)
+            ->subject($this->params['title'])
+            ->line($this->text);
     }
 
     /**
