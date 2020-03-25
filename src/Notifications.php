@@ -1,7 +1,6 @@
 <?php
 
 namespace CodersStudio\Notifications;
-use CodersStudio\Notifications\Notifications\System;
 use Notification;
 
 class Notifications
@@ -16,6 +15,7 @@ class Notifications
      */
     public function send($user, $message = "", $link = "/"):void
     {
-        Notification::send($user, new System($message, $link));
+        $class = config('notifications.system_notification');
+        Notification::send($user, new $class($message, $link));
     }
 }
