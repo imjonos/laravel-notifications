@@ -56,9 +56,6 @@ export default {
         console.log(error);
       });
     },
-    setReadAll: function(){
-
-    },
     setRead: function(messageId, link){
       axios.patch("/users/"+this.id+"/notifications/"+messageId)
       .then((response) => {
